@@ -1,3 +1,4 @@
+
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
@@ -22,31 +23,6 @@ def create_model():
 
 # this function will find movies related to choice entered and return list of 16 movies
 # in which first movie will be the choice.
-def recommend(choice):
-    # this try-except block will check whether count matrix is created or not, if not
-    # the it will call create_model() function.
-    try:
-        model.get_params()
-    except:
-        data, model, count_matrix = create_model()
-        #distances,indices = model.kneighbors(count_matrix[choice_index],n_neighbors=11)
-
-    # If movie name exactly matches with the name of movie in the data's title column
-    # then this block will be executed.
-
-    if choice in data['title'].values:
-        choice_index = data[data['title'] == choice].index.values[0]
-        distances, indices = model.kneighbors(
-            count_matrix[choice_index], n_neighbors=16)
-        movie_list = []
-        for i in indices.flatten():
-            movie_list.append(data[data.index == i]
-                              ['original_title'].values[0].title())
-        return movie_list
-# this function will find movies related to choice entered and return list of 16 movies
-# in which first movie will be the choice.
-
-
 def recommend(choice):
     # this try-except block will check whether count matrix is created or not, if not
     # the it will call create_model() function.
@@ -124,4 +100,4 @@ def search_movies():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
